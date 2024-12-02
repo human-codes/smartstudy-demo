@@ -20,6 +20,8 @@ public class Module {
     @ManyToOne
     private Course course;
 
+    private Boolean isActive = false;
+
     public Module(String name, Course courseId) {
         this.module_name = name;
         this.course = courseId;

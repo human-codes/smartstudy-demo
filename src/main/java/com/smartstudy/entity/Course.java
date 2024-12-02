@@ -17,4 +17,8 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String course_name;
+
+    public Course(String course_name) {
+        this.course_name = course_name;
+    }
 }
