@@ -1,10 +1,6 @@
 package com.smartstudy;
 
 import com.smartstudy.entity.Course;
-import com.smartstudy.entity.Groups;
-import com.smartstudy.entity.Modules;
-import com.smartstudy.entity_managerRepos.CourseRepo;
-import com.smartstudy.entity_managerRepos.ModuleRepo;
 import jakarta.persistence.EntityManager;
 
 import javax.servlet.ServletException;
@@ -16,19 +12,22 @@ import java.io.IOException;
 
 import static com.smartstudy.MyListener.EMF;
 
-@WebServlet("/addGroupServlet")
-public class AddGroupServlet extends HttpServlet {
+@WebServlet("/editcoursename")
+public class editCourseNameServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String parameter = req.getParameter("module_id");
-        String groupName = req.getParameter("group_name");
-        Modules module = ModuleRepo.getModuleById(Integer.parseInt(parameter));
-        try (EntityManager entityManager = EMF.createEntityManager()){
+
+        try(EntityManager entityManager= EMF.createEntityManager()) {
+            String courseId = req.getParameter("course_id");
+            String courseName = req.getParameter("name");
             entityManager.getTransaction().begin();
-            entityManager.persist(new Groups(groupName,module));
+            Course course = entityManager.find(Course.class, Integer.parseInt(courseId));
+            course.setCourse_name(courseName);
             entityManager.getTransaction().commit();
-            resp.sendRedirect("/GroupsPage.jsp");
+            resp.sendRedirect("CoursesPage.jsp");
+
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -50,11 +50,11 @@
                                 <td><%= course.getCourse_name() %></td>
                                 <td>
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <form action="GroupsPage.jsp" method="post" style="display: inline;">
-                                            <input type="hidden" name="course_id" value="<%= course.getId() %>">
-                                            <button type="submit" class="btn btn-success btn-sm mx-2">Groups</button>
+                                        <form action="ModulePage.jsp" method="post" style="display: inline;">
+                                            <input type="hidden" name="course_id" value="<%=course.getId()%>">
+                                            <button type="submit" class="btn btn-success btn-sm mx-2">Modules</button>
                                         </form>
-                                        <form action="editCourse" method="post" style="display: inline;">
+                                        <form action="editCourse.jsp" method="post" style="display: inline;">
                                             <input type="hidden" name="course_id" value="<%= course.getId() %>">
                                             <button type="submit" class="btn btn-primary btn-sm mx-2">Edit</button>
                                         </form>

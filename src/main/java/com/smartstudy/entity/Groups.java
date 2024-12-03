@@ -18,5 +18,10 @@ public class Groups {
     private String group_name;
 
     @ManyToOne
-    private Module module;
+    private Modules modules;
+
+    public Groups(String group_name, Modules modules) {
+        this.group_name = group_name;
+        this.modules = modules;
+    }
 }

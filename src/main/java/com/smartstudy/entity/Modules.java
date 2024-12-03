@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Module {
-
+public class Modules {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -20,9 +19,9 @@ public class Module {
     @ManyToOne
     private Course course;
 
-    private Boolean isActive = false;
+    private Boolean isActive = true;
 
-    public Module(String name, Course courseId) {
+    public Modules(String name, Course courseId) {
         this.module_name = name;
         this.course = courseId;
     }
