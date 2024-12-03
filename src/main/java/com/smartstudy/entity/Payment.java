@@ -21,10 +21,13 @@ public class Payment {
     private int amount=0;
     @CreationTimestamp
     @Column(updatable = false,insertable = true)
-    private LocalDateTime paymentDate;
+    private LocalDateTime paymentDate=LocalDateTime.now();
 
     @ManyToOne
-    private Groups group;
+    private Student student;
 
-
+    public Payment(int amount, Student student) {
+        this.amount = amount;
+        this.student = student;
+    }
 }
