@@ -58,13 +58,13 @@
                             <tbody>
                             <%
                                 for (Payment payment : payments) {
-                                    if (payment.getStudent().getId()==currentGroupId){
+                                    if (payment.getStudent().getId()==currentStudentId){
                                         java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                             %>
                             <tr>
                                 <td><%= payment.getId()%></td>
-                                <td><%= payment.getAmount() %></td>
-                                <td><%= payment.getPaymentDate().format(formatter)%>$</td>
+                                <td><%= payment.getAmount() %>$</td>
+                                <td><%= payment.getPaymentDate().format(formatter)%></td>
                                 <td>
                                     <div class="d-flex justify-content-center align-items-center">
                                         <form action="editPayment.jsp" method="post" style="display: inline;">

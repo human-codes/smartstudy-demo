@@ -90,6 +90,10 @@
                             <input type="text" class="form-control" name="course_name" placeholder="Enter new course name" required>
                             <button type="submit" class="btn btn-success">Add Course</button>
                         </div>
+
+                        <div class="mt-3">
+                            <a href="Report.jsp" class="btn btn-secondary">Report</a>
+                        </div>
                     </form>
                 </div>
             </div>
