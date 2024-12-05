@@ -14,13 +14,16 @@
     List<Course> courses = courseRepo.findAll();
 %>
 <div class="container-fluid vh-100 d-flex flex-column">
-    <div class="row flex-grow-1 overflow-auto">
-
-        <!-- Table Display Section -->
+    <div class="row flex-grow-1 overflow-auto p-5 align-items-start">
+    <!-- Table Display Section -->
         <div class="col-12 col-md-6">
             <div class="card">
                 <div class="card-header">
                     <h4 class="mb-0">Courses List</h4>
+                    <form class="mt-3 d-flex" action="" method="get">
+                        <input type="text" class="form-control me-2" name="search" placeholder="Search courses..." required>
+                        <button type="submit" class="btn btn-dark">Search</button>
+                    </form>
                 </div>
                 <div class="card-body">
                     <%
@@ -37,6 +40,7 @@
                         <table class="table table-striped table-bordered">
                             <thead class="thead-dark">
                             <tr class="text-center">
+                                <th scope="col">№</th>
                                 <th scope="col">Course ID</th>
                                 <th scope="col">Course Name</th>
                                 <th scope="col">Actions</th>
@@ -44,9 +48,12 @@
                             </thead>
                             <tbody>
                             <%
+                                int i=0;
                                 for (Course course : courses) {
+
                             %>
                             <tr>
+                                <td><%=i++%></td>
                                 <td><%= course.getId() %></td>
                                 <td><%= course.getCourse_name() %></td>
                                 <td>

@@ -28,6 +28,5 @@ public class AddStudentServlet extends HttpServlet {
         StudentRepo studentRepo = new StudentRepo();
         studentRepo.save(new Student(studentName, group));
         resp.sendRedirect("/StudentPage.jsp");
-
     }
 }
