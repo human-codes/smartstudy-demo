@@ -20,7 +20,7 @@
 <body>
 <%
     ModuleRepo moduleRepo=new ModuleRepo();
-    List<Modules> modulesList = moduleRepo.findAll();
+    List<Modules> modulesList = moduleRepo.findAll(0,10);
     String course_id = request.getParameter("course_id");
     if (course_id!=null){
         currentCourseId= Integer.parseInt(course_id);

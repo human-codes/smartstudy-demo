@@ -26,4 +26,10 @@ public class CourseRepo extends BaseRepo<Course>{
         }
     }
 
+    public static Long count() {
+        try (EntityManager entityManager = EMF.createEntityManager()) {
+            String jpql = "SELECT COUNT(c) FROM Course c";
+            return (Long) entityManager.createQuery(jpql).getSingleResult();
+        }
+    }
 }

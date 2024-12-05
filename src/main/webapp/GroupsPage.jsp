@@ -18,7 +18,7 @@
 <body>
 <%
     GroupsRepo groupsRepo=new GroupsRepo();
-    List<Groups> groups = groupsRepo.findAll();
+    List<Groups> groups = groupsRepo.findAll(0,10);
     String module_id = request.getParameter("module_id");
     if (module_id!=null){
         currentModuleId= Integer.parseInt(module_id);

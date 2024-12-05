@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Course extends BaseEntity {
 
-    private String course_name;
+    private String name;
 
     public Course(String course_name) {
-        this.course_name = course_name;
+        this.name = course_name;
     }
 }

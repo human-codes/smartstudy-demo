@@ -1,6 +1,7 @@
 <%@ page import="com.smartstudy.entity_managerRepos.CourseRepo" %>
 <%@ page import="com.smartstudy.entity.Course" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -10,18 +11,21 @@
 </head>
 <body>
 <%
-    CourseRepo courseRepo=new CourseRepo();
-    List<Course> courses = courseRepo.findAll();
+    String search = Objects.requireNonNullElse(request.getParameter("search"), "");
+    int currentPage = Integer.parseInt(Objects.requireNonNullElse(request.getParameter("page"), "1"));
+    CourseRepo courseRepo = new CourseRepo();
+    List<Course> courses = courseRepo.findAll(currentPage,search);
 %>
 <div class="container-fluid vh-100 d-flex flex-column">
     <div class="row flex-grow-1 overflow-auto p-5 align-items-start">
-    <!-- Table Display Section -->
+        <!-- Table Display Section -->
         <div class="col-12 col-md-6">
             <div class="card">
                 <div class="card-header">
                     <h4 class="mb-0">Courses List</h4>
                     <form class="mt-3 d-flex" action="" method="get">
-                        <input type="text" class="form-control me-2" name="search" placeholder="Search courses..." required>
+                        <input type="text" class="form-control me-2" name="search" placeholder="Search courses..."
+                               required>
                         <button type="submit" class="btn btn-dark">Search</button>
                     </form>
                 </div>
@@ -31,7 +35,8 @@
                     %>
                     <div class="alert alert-warning text-center" role="alert">
                         <h4 class="alert-heading">No Courses Available!</h4>
-                        <p>It seems like there are no courses available at the moment. Please check back later or add a new course to get started.</p>
+                        <p>It seems like there are no courses available at the moment. Please check back later or add a
+                            new course to get started.</p>
                     </div>
                     <%
                     } else {
@@ -48,14 +53,17 @@
                             </thead>
                             <tbody>
                             <%
-                                int i=0;
+                                int i = 0;
                                 for (Course course : courses) {
 
                             %>
                             <tr>
-                                <td><%=i++%></td>
-                                <td><%= course.getId() %></td>
-                                <td><%= course.getCourse_name() %></td>
+                                <td><%=++i%>
+                                </td>
+                                <td><%= course.getId() %>
+                                </td>
+                                <td><%= course.getCourse_name() %>
+                                </td>
                                 <td>
                                     <div class="d-flex justify-content-center align-items-center">
                                         <form action="ModulePage.jsp" method="post" style="display: inline;">
@@ -78,6 +86,17 @@
                             %>
                             </tbody>
                         </table>
+                        <%
+                            Long count=CourseRepo.count();
+                            int pageCount=(int)Math.ceil(count/10.0);
+                            for (int j = 1; j <= pageCount; j++) {
+                        %>
+                        <a href="?page=<%=j%>" class="btn    btn-dark"><%=j%></a>
+                        <%
+                            }
+                        %>
+
+
                     </div>
                     <%
                         }
@@ -95,7 +114,8 @@
                 <div class="card-body">
                     <form action="addCourseServlet" method="post">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="course_name" placeholder="Enter new course name" required>
+                            <input autofocus type="text" class="form-control" name="course_name"
+                                   placeholder="Enter new course name" required>
                             <button type="submit" class="btn btn-success">Add Course</button>
                         </div>
 

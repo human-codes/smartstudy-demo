@@ -21,7 +21,7 @@
 <body>
 <%
     PaymentsRepo paymentRepo=new PaymentsRepo();
-    List<Payment> payments = paymentRepo.findAll();
+    List<Payment> payments = paymentRepo.findAll(0,10);
     String student_id = request.getParameter("student_id");
     if (student_id!=null){
         currentStudentId= Integer.parseInt(student_id);

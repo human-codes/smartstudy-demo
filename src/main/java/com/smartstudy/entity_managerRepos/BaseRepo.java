@@ -2,10 +2,12 @@ package com.smartstudy.entity_managerRepos;
 
 import com.smartstudy.entity.Modules;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import lombok.val;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Queue;
 
 import static com.smartstudy.MyListener.EMF;
 
@@ -28,12 +30,16 @@ public class BaseRepo<T> {
         }
     }
 
-    public List<T> findAll() {
-        try (EntityManager entityManager = EMF.createEntityManager()){
-            return entityManager.createQuery("from %s".formatted(persistentClass.getSimpleName()),persistentClass).getResultList();
-        }
-        catch (Exception e) {
+    public List<T> findAll(int page,String search) {
+        try (EntityManager entityManager = EMF.createEntityManager()) {
+            page--;
+            return entityManager.createQuery("from %s t where t. ".formatted(persistentClass.getSimpleName()), persistentClass)
+                    .setFirstResult(page*10)
+                    .setMaxResults(10)
+                    .getResultList();
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
 }

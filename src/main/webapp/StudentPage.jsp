@@ -21,7 +21,7 @@
 <body>
 <%
     StudentRepo studentRepo=new StudentRepo();
-    List<Student> students = studentRepo.findAll();
+    List<Student> students = studentRepo.findAll(0,10);
     String group_id = request.getParameter("group_id");
     if (group_id!=null){
         currentGroupId= Integer.parseInt(group_id);
