@@ -5,6 +5,7 @@ import com.smartstudy.entity.Modules;
 import com.smartstudy.entity.Student;
 import com.smartstudy.entity_managerRepos.GroupsRepo;
 import com.smartstudy.entity_managerRepos.ModuleRepo;
+import com.smartstudy.entity_managerRepos.StudentRepo;
 import jakarta.persistence.EntityManager;
 
 import javax.servlet.ServletException;
@@ -23,15 +24,10 @@ public class AddStudentServlet extends HttpServlet {
 
         String parameter = req.getParameter("group_id");
         String studentName = req.getParameter("student_fullName");
-
         Groups group = GroupsRepo.getGroupById(Integer.parseInt(parameter));
-        try (EntityManager entityManager = EMF.createEntityManager()){
-            entityManager.getTransaction().begin();
-            entityManager.persist(new Student(studentName,group));
-            entityManager.getTransaction().commit();
-            resp.sendRedirect("/StudentPage.jsp");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        StudentRepo studentRepo = new StudentRepo();
+        studentRepo.save(new Student(studentName, group));
+        resp.sendRedirect("/StudentPage.jsp");
+
     }
 }

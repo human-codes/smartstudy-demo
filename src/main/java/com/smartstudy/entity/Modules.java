@@ -8,12 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 
-public class Modules {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Modules extends BaseEntity {
 
     private String module_name;
     @ManyToOne

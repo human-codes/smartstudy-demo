@@ -4,6 +4,7 @@ import com.smartstudy.entity.Course;
 import com.smartstudy.entity.Groups;
 import com.smartstudy.entity.Modules;
 import com.smartstudy.entity_managerRepos.CourseRepo;
+import com.smartstudy.entity_managerRepos.GroupsRepo;
 import com.smartstudy.entity_managerRepos.ModuleRepo;
 import jakarta.persistence.EntityManager;
 
@@ -23,14 +24,10 @@ public class AddGroupServlet extends HttpServlet {
 
         String parameter = req.getParameter("module_id");
         String groupName = req.getParameter("group_name");
+        GroupsRepo groupsRepo = new GroupsRepo();
         Modules module = ModuleRepo.getModuleById(Integer.parseInt(parameter));
-        try (EntityManager entityManager = EMF.createEntityManager()){
-            entityManager.getTransaction().begin();
-            entityManager.persist(new Groups(groupName,module));
-            entityManager.getTransaction().commit();
-            resp.sendRedirect("/GroupsPage.jsp");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        groupsRepo.save(new Groups(groupName,module));
+        resp.sendRedirect("/GroupsPage.jsp");
+
     }
 }

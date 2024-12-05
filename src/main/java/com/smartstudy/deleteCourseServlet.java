@@ -13,7 +13,7 @@ import java.io.IOException;
 import static com.smartstudy.MyListener.EMF;
 
 @WebServlet("/deleteCourse")
-public class deleteCourseServlet extends HttpServlet {
+public class   deleteCourseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

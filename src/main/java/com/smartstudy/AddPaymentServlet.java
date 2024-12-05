@@ -4,6 +4,7 @@ import com.smartstudy.entity.Groups;
 import com.smartstudy.entity.Payment;
 import com.smartstudy.entity.Student;
 import com.smartstudy.entity_managerRepos.GroupsRepo;
+import com.smartstudy.entity_managerRepos.PaymentsRepo;
 import com.smartstudy.entity_managerRepos.StudentRepo;
 import jakarta.persistence.EntityManager;
 
@@ -24,15 +25,10 @@ public class AddPaymentServlet extends HttpServlet {
         String parameter = req.getParameter("student_id");
         String amount = req.getParameter("amount");
         int realAmount=Integer.parseInt(amount);
-
+        PaymentsRepo paymentsRepo = new PaymentsRepo();
         Student student = StudentRepo.getStudentById(Integer.parseInt(parameter));
-        try (EntityManager entityManager = EMF.createEntityManager()){
-            entityManager.getTransaction().begin();
-            entityManager.persist(new Payment(realAmount,student));
-            entityManager.getTransaction().commit();
-            resp.sendRedirect("/PaymentsPage.jsp");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        paymentsRepo.save(new Payment(realAmount,student));
+        resp.sendRedirect("/PaymentsPage.jsp");
+
     }
 }

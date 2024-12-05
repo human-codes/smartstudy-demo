@@ -12,12 +12,8 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
-public class Payment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
+public class Payment extends BaseEntity {
     private int amount=0;
     @CreationTimestamp
     @Column(updatable = false,insertable = true)

@@ -20,10 +20,11 @@
 </head>
 <body>
 <%
-    List<Payment> payments = PaymentsRepo.getPayments();
-    String parameter = request.getParameter("student_id");
-    if (parameter!=null){
-        currentStudentId= Integer.parseInt(parameter);
+    PaymentsRepo paymentRepo=new PaymentsRepo();
+    List<Payment> payments = paymentRepo.findAll();
+    String student_id = request.getParameter("student_id");
+    if (student_id!=null){
+        currentStudentId= Integer.parseInt(student_id);
     }
 %>
 <div class="container-fluid vh-100 d-flex flex-column">

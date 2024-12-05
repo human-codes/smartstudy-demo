@@ -17,10 +17,11 @@
 </head>
 <body>
 <%
-    List<Groups> groups = GroupsRepo.getGroups();
-    String parameter = request.getParameter("module_id");
-    if (parameter!=null){
-        currentModuleId= Integer.parseInt(parameter);
+    GroupsRepo groupsRepo=new GroupsRepo();
+    List<Groups> groups = groupsRepo.findAll();
+    String module_id = request.getParameter("module_id");
+    if (module_id!=null){
+        currentModuleId= Integer.parseInt(module_id);
     }
 %>
 <div class="container-fluid vh-100 d-flex flex-column">

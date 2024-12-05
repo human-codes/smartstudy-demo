@@ -10,7 +10,8 @@
 </head>
 <body>
 <%
-    List<Course> courses = CourseRepo.getCourses();
+    CourseRepo courseRepo=new CourseRepo();
+    List<Course> courses = courseRepo.findAll();
 %>
 <div class="container-fluid vh-100 d-flex flex-column">
     <div class="row flex-grow-1 overflow-auto">

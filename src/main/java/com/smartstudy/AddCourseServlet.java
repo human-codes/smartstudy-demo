@@ -1,6 +1,7 @@
 package com.smartstudy;
 
 import com.smartstudy.entity.Course;
+import com.smartstudy.entity_managerRepos.CourseRepo;
 import jakarta.persistence.EntityManager;
 
 import javax.servlet.ServletException;
@@ -17,13 +18,8 @@ public class AddCourseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String course_name = req.getParameter("course_name");
-        try (EntityManager entityManager = EMF.createEntityManager()){
-            entityManager.getTransaction().begin();
-            entityManager.persist(new Course(course_name));
-            entityManager.getTransaction().commit();
-            resp.sendRedirect("/CoursesPage.jsp");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        CourseRepo cr = new CourseRepo();
+        cr.save(new Course(course_name));
+        resp.sendRedirect("/CoursesPage.jsp");
     }
 }

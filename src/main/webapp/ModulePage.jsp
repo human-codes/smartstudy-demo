@@ -19,10 +19,11 @@
 </head>
 <body>
 <%
-    List<Modules> modulesList = ModuleRepo.getModules();
-    String parameter = request.getParameter("course_id");
-    if (parameter!=null){
-        currentCourseId= Integer.parseInt(parameter);
+    ModuleRepo moduleRepo=new ModuleRepo();
+    List<Modules> modulesList = moduleRepo.findAll();
+    String course_id = request.getParameter("course_id");
+    if (course_id!=null){
+        currentCourseId= Integer.parseInt(course_id);
     }
 %>
 <div class="container-fluid vh-100 d-flex flex-column">

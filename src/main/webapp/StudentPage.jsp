@@ -20,10 +20,11 @@
 </head>
 <body>
 <%
-    List<Student> students = StudentRepo.getStudents();
-    String parameter = request.getParameter("group_id");
-    if (parameter!=null){
-        currentGroupId= Integer.parseInt(parameter);
+    StudentRepo studentRepo=new StudentRepo();
+    List<Student> students = studentRepo.findAll();
+    String group_id = request.getParameter("group_id");
+    if (group_id!=null){
+        currentGroupId= Integer.parseInt(group_id);
     }
 %>
 <div class="container-fluid vh-100 d-flex flex-column">
